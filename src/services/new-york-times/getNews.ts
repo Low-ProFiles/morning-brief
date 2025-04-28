@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { NewsItem } from '../types/newsItem';
-import { withRetry } from '../common/withRetry';
-
-const NEW_YORK_TIMES_API_TOKEN = import.meta.env.VITE_NEW_YORK_TIMES_API_TOKEN;
+import { NewsItem } from '../../types/common/newsItem';
+import { withRetry } from '../../utils/withRetry';
+import { NEW_YORK_TIMES_API_TOKEN } from '../../config/apiToken';
+import { NEWYORK_TIMES_API_URL } from '../../config/apiUrl';
 
 const formatDate = (d: Date): string => {
   const y = d.getFullYear()
@@ -27,7 +27,7 @@ export const fetchFromNewYorkTimes = (category: string): Promise<NewsItem[]> => 
           pub_date: string
         }> }
       }>(
-        'https://api.nytimes.com/svc/search/v2/articlesearch.json',
+        NEWYORK_TIMES_API_URL,
         {
           params: {
             'api-key': NEW_YORK_TIMES_API_TOKEN,

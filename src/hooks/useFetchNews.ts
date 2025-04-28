@@ -1,7 +1,7 @@
-import { NewsItem } from '../types/newsItem'
-import { fetchFromNewsAPI } from '../fetching/newsService'
-import { fetchFromNewYorkTimes } from '../fetching/newYorkTimesService'
-import { fetchFromGuardianAPI } from '../fetching/guardianService'
+import { NewsItem } from '../types/common/newsItem'
+import { fetchFromNewsAPI } from '../services/news/getNews'
+import { fetchFromNewYorkTimes } from '../services/new-york-times/getNews'
+import { fetchFromGuardianAPI } from '../services/guardian/getNews'
 
 /** 불러올 카테고리 */
 const DEFAULT_CATEGORIES = ['business'] as const

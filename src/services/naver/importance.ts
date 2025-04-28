@@ -1,12 +1,11 @@
 import axios from 'axios';
-
-const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_CLIENT_ID!;
-const NAVER_CLIENT_SECRET = import.meta.env.VITE_NAVER_CLIENT_SECRET!;
+import { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET } from '../../config/apiToken'
+import { NAVER_TREND_DATA_LAB_API_URL } from '../../config/apiUrl';
 
 // keyword 당 최근 7일 검색량 평균을 반환
 export async function fetchSocialScore(keyword: string): Promise<number> {
   const res = await axios.post(
-    '/api/naver/search',
+    NAVER_TREND_DATA_LAB_API_URL,
     {
       startDate: '2025-04-20',
       endDate: '2025-04-27',

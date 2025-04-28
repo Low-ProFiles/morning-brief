@@ -14,10 +14,12 @@ export default defineConfig({
         secure: true,
         rewrite: (path) => path.replace(/^\/api\/naver/, ''),
       },
-      // '/api/trends': {
-      //   target:  'http://localhost:5173/api/trends',
-      //   changeOrigin: true,
-      // },
+      '/api/deepl': {
+        target: 'https://api-free.deepl.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: path => path.replace(/^\/api\/deepl/, '/v2'),
+      },
     },
   },
 })

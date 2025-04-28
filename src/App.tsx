@@ -1,6 +1,6 @@
 // src/App.tsx
 import  { useEffect, useState } from 'react'
-import { NewsItem } from './types/newsItem'
+import { NewsItem } from './types/common/newsItem'
 import { useFetchNews } from './hooks/useFetchNews'
 import { NewsImportanceList } from './components/lists/newsImportanceList'
 
@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <div>
-      <h1>뉴스 중요도(Simple)</h1>
+      <h1>뉴스 중요도</h1>
       <NewsImportanceList news={news} />
     </div>
   )

@@ -1,16 +1,13 @@
 import axios from 'axios';
 import { split as splitSentences } from 'sentence-splitter';
 import pLimit from 'p-limit';
-
-const HUGGING_FACE_API_TOKEN: string = import.meta.env.VITE_HUGGING_FACE_API_TOKEN;
-const MODEL_URL: string = 'https://api-inference.huggingface.co/pipeline/summarization/facebook/bart-large-cnn';
+import { HUGGING_FACE_API_TOKEN } from '../../config/apiToken'
+import { HUGGING_FACE_API_URL } from '../../config/apiUrl';
 
 /** 최대 입력 토큰 수 */
 const MAX_TOKENS: number = 1024;
 /** 청크당 최대 문자 수 (토큰 대비 보수적 추정) */
 const CHUNK_CHAR_SIZE: number = 2048;
-/** 청크 간 중첩 문자 수 */
-const OVERLAP: number = 200;
 /** 동시 호출 제한 */
 const CONCURRENCY_LIMIT: number = 3;
 const limit = pLimit(CONCURRENCY_LIMIT);
@@ -66,7 +63,7 @@ const summarizeText = async (text: string): Promise<string> => {
 
   for (let i = 1; i <= 3; i++) {
     try {
-      const { data } = await axios.post<{ summary_text: string }[]>(MODEL_URL, payload, {
+      const { data } = await axios.post<{ summary_text: string }[]>(HUGGING_FACE_API_URL, payload, {
         headers: {
           Authorization: `Bearer ${HUGGING_FACE_API_TOKEN}`,
           'Content-Type': 'application/json'

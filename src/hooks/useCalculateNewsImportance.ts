@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { NewsItem } from '../types/newsItem';
-import { ImportanceResult } from '../types/importanceResult';
-import { calculateNewsImportance } from '../service/calculateNewsImportance';
+import { NewsItem } from '../types/common/newsItem';
+import { ImportanceResult } from '../types/naver';
+import { calculateNewsImportance } from '../domain/importance/calculateNewsImportance';
 
 export const useCalculateNewsImportance = (newsItems: NewsItem[]) => {
   const [results, setResults] = useState<ImportanceResult[]>([]);
