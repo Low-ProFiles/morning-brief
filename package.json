@@ -10,15 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@firebasegen/default-connector": "link:dataconnect-generated/js/default-connector",
     "@types/node": "^22.15.2",
     "axios": "^1.9.0",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "express": "^5.1.0",
+    "firebase": "^11.7.3",
     "google-trends-api": "^4.9.2",
     "p-limit": "^6.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.0",
     "sentence-splitter": "^5.0.0",
     "vite-plugin-node-polyfills": "^0.23.0"
   },
@@ -37,5 +40,10 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.31.0",
     "vite": "^6.3.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@firebasegen/default-connector": "link:dataconnect-generated/js/default-connector"
+    }
   }
 }
