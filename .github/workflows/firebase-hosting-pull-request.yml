@@ -12,9 +12,16 @@ jobs:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: pnpm install --frozen-lockfile && pnpm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: install dependencies and build
+        run: pnpm install --frozen-lockfile && pnpm run build
+      - name: deploy to firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MORNING_BRIEF_A1C9A }}
