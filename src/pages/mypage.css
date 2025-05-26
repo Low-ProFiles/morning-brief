@@ -1,0 +1,106 @@
+/* 전체 컨테이너 */
+.mypage-container {
+  padding: 16px;
+  background-color: #ffffff;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+/* 제목 
+.mypage-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* 메뉴 박스 전체 영역 */
+.menu-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  margin-bottom: 20px;
+}
+
+/* 각각의 메뉴 항목 */
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  background-color: white;
+  transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+  background-color: #f3f3f3;
+}
+
+/* 로그아웃 버튼 */
+.logout-button {
+  width: 100%;
+  padding: 12px;
+  background: #facc15; /* 노란색 */
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.logout-button:hover {
+  opacity: 0.9;
+}
+
+/* 사용자 정보 박스 (내 정보 페이지용) */
+.info-box {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 12px;
+  background-color: #fff;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+}
+
+/* 뉴스 선택 그리드 */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* 뉴스 항목 버튼 */
+.news-item {
+  padding: 16px;
+  text-align: center;
+  border-radius: 6px;
+  background: #f0f0f0;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.news-item.selected {
+  background: #facc15;
+  color: #000;
+}
+
+/* 알림 설정 체크박스 행 */
+.notification-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
