@@ -46,7 +46,7 @@ const Login = ({ auth }) => {
                     />
                 </div>
                 <div style={{textAlign:'right'}}>
-                    <a href=''>Forgot Password?</a>
+                    <a href="#">Forgot Password?</a>
                 </div>
                 <div className='login-buttons'>
                     <button className='normalLogin'>Login</button>
@@ -70,7 +70,7 @@ const Login = ({ auth }) => {
                         />Sign up with Google</button>
                 </div>
                 <div>
-                    <p style={{textAlign: 'center', color:'#E1E1E1'}}>Don't have an acount? <a href=''>Sign up</a></p>
+                    <p style={{textAlign: 'center', color:'#E1E1E1'}}>Don't have an acount? <a href="#">Sign up</a></p>
                 </div>
             </div>
         </section>
