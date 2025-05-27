@@ -1,0 +1,12 @@
+specVersion: "v1"
+serviceId: "morning-brief"
+location: "asia-northeast3"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "morning-brief-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
