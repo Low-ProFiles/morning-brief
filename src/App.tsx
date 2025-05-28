@@ -7,7 +7,7 @@ import {  BrowserRouter, Route, Routes } from 'react-router-dom'
 import MyInfo from './pages/myInfo'
 import MyNews from './pages/myNews'
 import MyPage from './pages/myPage'
-import Notification from './pages/notification'
+import NotificationComponent from './pages/notification'
 
 export default function App() {
   // const [news, setNews] = useState<NewsItem[]>([])
@@ -30,7 +30,7 @@ export default function App() {
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/mypage/info' element={<MyInfo />} />
         <Route path='/mypage/news' element={<MyNews />} />
-        <Route path='/mypage/notification' element={<Notification />} />
+        <Route path='/mypage/notification' element={<NotificationComponent />} />
         </Routes>
       </BrowserRouter>
   )

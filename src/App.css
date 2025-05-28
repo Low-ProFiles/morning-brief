@@ -1,19 +1,40 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* app.css */
+
+/* 전체 초기화 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #e5e7eb;
+}
+
+/* ✅ #root: 수평 정렬만 적용 */
+#root {
+  display: flex;
+  justify-content: center;  /* 수평 가운데 정렬만! */
+  background-color: #e5e7eb;
+}
+
+
+/* 로고 관련 기존 스타일 유지 */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -33,10 +54,12 @@
   }
 }
 
+/* 카드 스타일 */
 .card {
   padding: 2em;
 }
 
+/* 문서 링크 스타일 */
 .read-the-docs {
   color: #888;
 }
