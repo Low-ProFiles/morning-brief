@@ -20,7 +20,7 @@ export const calculateNewsImportance = async (
       Promise.resolve(computeSourceScore(item)),
       Promise.resolve(computeRecencyScore(item)),
       Promise.resolve(computeLengthScore(item)),
-      // 소셜 스코어는 title 기준으로 대표 키워드 하나 가져와 계산 (예시)
+      // 소셜 스코어는 title 기준으로 대표 키워드 하나 가져와 계산
       fetchSocialScore(KEYWORD_LIST[0]),
     ]);
 
