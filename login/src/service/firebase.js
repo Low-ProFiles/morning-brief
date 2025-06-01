@@ -8,7 +8,7 @@ import { getDatabase } from "firebase/database"; //추가
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
+//재업로드
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
