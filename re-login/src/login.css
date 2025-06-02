@@ -1,0 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+
+.login-buttons {
+  display: flex;
+  flex-direction: column; /* 수직 정렬 */
+  gap: 10px; /* 버튼 사이 간격 */
+  align-items: center; /* 버튼 가운데 정렬 */
+}
+
+h1 {
+    text-align: center;
+}
+
+.ceter {
+  display: flex;
+  flex-direction: column; /* 수직 정렬 */
+  align-items: flex-start; /* 왼쪽 정렬 */
+  gap: 5px;
+}
+
+.home {
+    width: 377px;
+    height: 686px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    padding: 5px;
+}
+
+.login-header {
+  position: relative;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+/* 뒤로 가기 버튼 */
+.backbutton {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+/* 중앙 제목 */
+.login-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+
+a {
+  font-weight: bold;
+  color: black;
+}
+
+.normalLogin {
+  background-color: #FFC107;
+  color: white;
+  width: 100%;
+  border: none;              /* 기본 테두리 제거 */
+  border-radius: 8px;
+}
+
+.googleLogin {
+  background-color: white;
+  width: 100%;         
+  border-radius: 8px;
+  border-color: #E1E1E1;
+  border-width: 2px;
+  border-style: solid;
+}
+
+input {
+  width: 100%;
+  border-radius: 8px;
+  border-color: #E1E1E1;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ccc;
+}
+
+.divider::before {
+  margin-right: 10px;
+}
+
+.divider::after {
+  margin-left: 10px;
+}
+
+.divider span {
+  font-size: 14px;
+  color: #aaa;
+}
+
+a {
+  text-decoration: none;
+}
