@@ -9,6 +9,7 @@ import MyNews from './pages/myNews'
 import MyPage from './pages/myPage'
 import NotificationComponent from './pages/notification'
 
+
 export default function App() {
   // const [news, setNews] = useState<NewsItem[]>([])
   // const [loading, setLoading] = useState(true)

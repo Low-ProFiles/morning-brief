@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './app.jsx';
-import authInstance from "./service/auth";
+import authInstance from "./services/auth";
 import { BrowserRouter } from 'react-router-dom';
 
 
