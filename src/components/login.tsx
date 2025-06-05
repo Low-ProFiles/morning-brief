@@ -74,7 +74,7 @@ const Login: React.FC<LoginProps> = ({ auth }) => {
         </IconButton>
         <Typography variant="h6" align="center">로그인</Typography>
       </Box>
-
+ 
       {/* 입력 필드 */}
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}>
         <Typography fontWeight="bold">Your Email</Typography>
