@@ -1,5 +1,6 @@
-import useCurrentUser from '../config/getCurrentUser';
-import './mypage.css';
+import useCurrentUser from "../config/getCurrentUser";
+import { useAuth } from "../contexts/AuthContext";
+import "./mypage.css";
 
 type User = {
   email?: string;
@@ -7,7 +8,7 @@ type User = {
 };
 
 export default function MyInfo() {
-  const user: User = useCurrentUser();
+  const { user } = useAuth();
 
   return (
     <div className="mypage-container">
@@ -15,11 +16,11 @@ export default function MyInfo() {
       <div className="info-box">
         <div className="info-row">
           <span>이메일</span>
-          <span>{user?.email ?? '정보 없음'}</span>
+          <span>{user?.email ?? "정보 없음"}</span>
         </div>
         <div className="info-row">
           <span>이름</span>
-          <span>{user?.displayName ?? '정보 없음'}</span>
+          <span>{user?.displayName ?? "정보 없음"}</span>
         </div>
       </div>
     </div>

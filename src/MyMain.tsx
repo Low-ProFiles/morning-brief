@@ -1,42 +1,108 @@
-import { Container } from '@mui/material';
-import NewsSection from './components/NewsSection';
-import theme from './theme';
+import { Container, Typography } from "@mui/material";
+import NewsSection from "./components/NewsSection";
+import theme from "./theme";
+import { useState, useEffect } from "react";
+import { NewsItem } from "./types/common/newsItem";
 
-const worldNews = [
-  { id: 1, title: 'AI가 바꾸는 미래 AI가 바꾸는 미래 AI가 바꾸는 미래 AI가 바꾸는 미래', time: '7h ago' },
-  { id: 2, title: '우주여행, 상용화 어디까지?', time: '6h ago' },
-  { id: 3, title: '기후 변화 대응 전략', time: '5h ago' },
-  { id: 4, title: '손흥민 기후 변화, 시즌 20호골!', time: '5h ago' },  
-];
+import { useAuth } from "./contexts/AuthContext";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
-const sportsNews = [
-  { id: 1, title: '손흥민, 시즌 20호골!', time: '2h ago' },
-  { id: 2, title: '올림픽 준비 박차', time: '3h ago' },
-  { id: 3, title: '김연아의 새로운 행보', time: '4h ago' },
-];
+import { useFetchNews } from "./hooks/useFetchNews";
+import { StandardCategory } from "./config/apiParameterMapping";
 
-const financeNews = [
-  { id: 1, title: '비트코인 80,000달러 돌파', time: '1h ago' },
-  { id: 2, title: '테슬라 주가 폭등', time: '2h ago' },
-  { id: 3, title: '엔화 약세, 환율 비상', time: '4h ago' },
-];
+const newsSectionsDisplayMap: { [key in StandardCategory]?: string } = {
+  politics: "정치 뉴스",
+  economy: "경제 뉴스",
+  society: "사회 뉴스",
+  culture: "문화 뉴스",
+  sports: "스포츠 뉴스",
+};
 
-const businesslNews = [
-  { id: 1, title: '비트코인 80,000달러 돌파', time: '1h ago' },
-  { id: 2, title: '테슬라 주가 폭등', time: '2h ago' },
-  { id: 3, title: '엔화 약세, 환율 비상', time: '4h ago' },
-];
+type NewsItemWithCategory = NewsItem & { category: StandardCategory };
 
 export default function MyMain() {
+  const { user, loading: authLoading } = useAuth();
+  const db = getFirestore();
+
+  const [selectedStandardCategories, setSelectedStandardCategories] = useState<StandardCategory[]>(
+    [],
+  );
+  const [settingsLoading, setSettingsLoading] = useState(true);
+
+  useEffect(() => {
+    if (authLoading || !user) {
+      if (!user && !authLoading) {
+        setSelectedStandardCategories([]);
+        setSettingsLoading(false);
+      }
+      return;
+    }
+
+    const fetchInterestSettings = async () => {
+      setSettingsLoading(true);
+      try {
+        const docRef = doc(db, "userNewsSettings", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          if (data.topics && Array.isArray(data.topics)) {
+            const selectedValues = data.topics
+              .filter((topic: any) => topic.selected)
+              .map((topic: any) => topic.value as StandardCategory);
+
+            setSelectedStandardCategories(selectedValues);
+          } else {
+            setSelectedStandardCategories([]);
+          }
+        } else {
+          setSelectedStandardCategories([]);
+        }
+      } catch {
+        setSelectedStandardCategories([]);
+      } finally {
+        setSettingsLoading(false);
+      }
+    };
+
+    fetchInterestSettings();
+  }, [user, authLoading, db]);
+
+  const { data: allFetchedNews = [], isLoading: newsLoading } = useFetchNews(
+    selectedStandardCategories,
+  );
+
+  if (authLoading || settingsLoading || newsLoading) {
+    return <div>뉴스 불러오는 중...</div>;
+  }
+
   return (
-    <Container sx={{
-    pt: theme.customSpacing.pagePaddingTop,
-    pb: theme.customSpacing.pagePaddingBottom,
-    }}>
-      <NewsSection title="The world in brief" items={worldNews} />
-      <NewsSection title="Sports" items={sportsNews} />
-      <NewsSection title="Finance" items={financeNews} />
-      <NewsSection title="Business" items={businesslNews} />
+    <Container
+      sx={{ pt: theme.customSpacing.pagePaddingTop, pb: theme.customSpacing.pagePaddingBottom }}
+    >
+      {selectedStandardCategories.length === 0 ? (
+        <Typography variant="body1" textAlign="center" sx={{ mt: 4 }}>
+          관심 뉴스 설정을 해주세요.
+        </Typography>
+      ) : (
+        selectedStandardCategories.map((standardCategoryName) => {
+          const itemsForCategory = allFetchedNews.filter(
+            (item) => item.category === standardCategoryName,
+          );
+          const sectionTitle = newsSectionsDisplayMap[standardCategoryName] || standardCategoryName;
+
+          if (itemsForCategory.length > 0) {
+            return (
+              <NewsSection
+                key={standardCategoryName}
+                title={sectionTitle}
+                items={itemsForCategory}
+              />
+            );
+          }
+          return null;
+        })
+      )}
     </Container>
   );
 }

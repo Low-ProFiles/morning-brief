@@ -1,6 +1,6 @@
 // src/components/NewsSection.tsx
-import { Box, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 type NewsItem = {
   id: number;
@@ -15,6 +15,7 @@ type Props = {
 
 export default function NewsSection({ title, items }: Props) {
   const navigate = useNavigate();
+  console.log(items, "items");
 
   return (
     <Box sx={{ mb: 4 }}>
@@ -26,9 +27,9 @@ export default function NewsSection({ title, items }: Props) {
       {/* 제목 아래 줄 */}
       <Box
         sx={{
-          height: '2px',
-          width: '100%',
-          bgcolor: 'black',
+          height: "2px",
+          width: "100%",
+          bgcolor: "black",
           mb: 2,
           borderRadius: 1,
         }}
@@ -37,65 +38,68 @@ export default function NewsSection({ title, items }: Props) {
       {/* 카드 리스트 */}
       <Box
         sx={{
-          display: 'flex',
-          overflowX: 'auto',
+          display: "flex",
+          overflowX: "auto",
           gap: 2,
           pb: 2,
-          scrollSnapType: 'x mandatory',
-          scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch',
-          '&::-webkit-scrollbar': { display: 'none' },
+          scrollSnapType: "x mandatory",
+          scrollbarWidth: "none",
+          WebkitOverflowScrolling: "touch",
+          "&::-webkit-scrollbar": { display: "none" },
         }}
       >
-        {items.map((item) => (
-          <Box
-            key={item.id}
-            onClick={() => navigate(`/news/${item.id}`)}
-            sx={{
-              width: 180,  // 카드 크기 고정 (적당히 줄여서)
-              flexShrink: 0,
-              scrollSnapAlign: 'start',
-              borderRadius: 0.5,
-              boxShadow: 1,
-              bgcolor: '#fff',
-              p: 1,
-              cursor: 'pointer',
-              '&:hover': {
-                boxShadow: 3,
-              },
-              userSelect: 'none',
-            }}
-          >
+        {items.map((item) => {
+          const newsRandomId = new Date(item.publishedAt).getTime() % 10000;
+          return (
             <Box
+              key={item.id}
+              onClick={() => navigate(`/news/${newsRandomId}`)}
               sx={{
-                width: '100%',
-                height: 100,
-                bgcolor: '#ccc',
+                width: 180, // 카드 크기 고정 (적당히 줄여서)
+                flexShrink: 0,
+                scrollSnapAlign: "start",
                 borderRadius: 0.5,
-                mb: 1,
-              }}
-            />
-            <Typography variant="caption" color="text.secondary" sx={{ fontSize: 12 }}>
-              {item.time}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                mt: 0.5,
-                fontWeight: 500,
-                display: '-webkit-box',
-                WebkitLineClamp: 2,          // 2줄까지만 보이게
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                fontSize: 14,
-                lineHeight: 1.4,
+                boxShadow: 1,
+                bgcolor: "#fff",
+                p: 1,
+                cursor: "pointer",
+                "&:hover": {
+                  boxShadow: 3,
+                },
+                userSelect: "none",
               }}
             >
-              {item.title}
-            </Typography>
-          </Box>
-        ))}
+              <Box
+                sx={{
+                  width: "100%",
+                  height: 100,
+                  bgcolor: "#ccc",
+                  borderRadius: 0.5,
+                  mb: 1,
+                }}
+              />
+              <Typography variant="caption" color="text.secondary" sx={{ fontSize: 12 }}>
+                {item.time}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  mt: 0.5,
+                  fontWeight: 500,
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2, // 2줄까지만 보이게
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  fontSize: 14,
+                  lineHeight: 1.4,
+                }}
+              >
+                {item.title}
+              </Typography>
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );

@@ -2,20 +2,19 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
+import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_DATABASE_URL, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_APP_ID, FIREBASE_MEASUREMENT_ID } from '../config/apiToken';
 
 // Firebase 설정 객체 (환경 변수 사용)
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY as string,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN as string,
-  databaseURL: process.env.REACT_APP_DATABASE_URL as string,
-  projectId: process.env.REACT_APP_PROJECT_ID as string,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET as string,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID as string,
-  appId: process.env.REACT_APP_APP_ID as string,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID as string,
+  apiKey: FIREBASE_API_KEY as string,
+  authDomain: FIREBASE_AUTH_DOMAIN as string,
+  databaseURL: FIREBASE_DATABASE_URL as string,
+  projectId: FIREBASE_PROJECT_ID as string,
+  storageBucket: FIREBASE_STORAGE_BUCKET as string,
+  messagingSenderId: FIREBASE_MESSAGING_SENDER_ID as string,
+  appId: FIREBASE_APP_ID as string,
+  measurementId: FIREBASE_MEASUREMENT_ID as string,
 };
-
-console.log("API KEY:", process.env.REACT_APP_API_KEY);
 
 // Firebase 앱 초기화
 const firebaseApp = initializeApp(firebaseConfig);
