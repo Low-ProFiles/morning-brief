@@ -2,23 +2,21 @@ import { Container, Typography } from "@mui/material";
 import NewsSection from "./components/NewsSection";
 import theme from "./theme";
 import { useState, useEffect } from "react";
-import { NewsItem } from "./types/common/newsItem";
-
 import { useAuth } from "./contexts/AuthContext";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-
 import { useFetchNews } from "./hooks/useFetchNews";
 import { StandardCategory } from "./config/apiParameterMapping";
 
 const newsSectionsDisplayMap: { [key in StandardCategory]?: string } = {
   politics: "정치 뉴스",
-  economy: "경제 뉴스",
+  business: "경제 뉴스",
   society: "사회 뉴스",
   culture: "문화 뉴스",
-  sports: "스포츠 뉴스",
+  environment: "환경 뉴스",
+  sport: "스포츠 뉴스",
+  science: "과학 뉴스",
+  fashion: "패션 뉴스",
 };
-
-type NewsItemWithCategory = NewsItem & { category: StandardCategory };
 
 export default function MyMain() {
   const { user, loading: authLoading } = useAuth();
@@ -91,16 +89,9 @@ export default function MyMain() {
           );
           const sectionTitle = newsSectionsDisplayMap[standardCategoryName] || standardCategoryName;
 
-          if (itemsForCategory.length > 0) {
-            return (
-              <NewsSection
-                key={standardCategoryName}
-                title={sectionTitle}
-                items={itemsForCategory}
-              />
-            );
-          }
-          return null;
+          return (
+            <NewsSection key={standardCategoryName} title={sectionTitle} items={itemsForCategory} />
+          );
         })
       )}
     </Container>

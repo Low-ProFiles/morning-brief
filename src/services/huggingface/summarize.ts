@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { split as splitSentences } from 'sentence-splitter';
-import pLimit from 'p-limit';
-import { HUGGING_FACE_API_TOKEN } from '../../config/apiToken'
-import { HUGGING_FACE_API_URL } from '../../config/apiUrl';
+import axios from "axios";
+import { split as splitSentences } from "sentence-splitter";
+import pLimit from "p-limit";
+import { HUGGING_FACE_API_TOKEN } from "../../config/apiToken";
+import { HUGGING_FACE_API_URL } from "../../config/apiUrl";
 
 /** 최대 입력 토큰 수 */
 const MAX_TOKENS: number = 1024;
@@ -22,18 +22,17 @@ const estimateTokens = (txt: string): number => Math.ceil(txt.length / 4);
  */
 const getSmartChunks = (text: string): string[] => {
   const sentences = splitSentences(text)
-    .filter(node => node.type === 'Sentence')
+    .filter((node) => node.type === "Sentence")
     .map((node: any) => node.raw);
 
   const chunks: string[] = [];
-  let buffer = '';
+  let buffer = "";
 
   for (const sent of sentences) {
     const candidate = buffer ? `${buffer} ${sent}` : sent;
     // 보수적으로 문자 수 자르기 + 토큰 추정
-    const truncated = candidate.length > CHUNK_CHAR_SIZE
-      ? candidate.slice(0, CHUNK_CHAR_SIZE)
-      : candidate;
+    const truncated =
+      candidate.length > CHUNK_CHAR_SIZE ? candidate.slice(0, CHUNK_CHAR_SIZE) : candidate;
     if (estimateTokens(truncated) <= MAX_TOKENS) {
       buffer = truncated;
     } else {
@@ -57,8 +56,8 @@ const summarizeText = async (text: string): Promise<string> => {
       num_beams: 4,
       length_penalty: 1.2,
       no_repeat_ngram_size: 2,
-      truncation: true
-    }
+      truncation: true,
+    },
   };
 
   for (let i = 1; i <= 3; i++) {
@@ -66,8 +65,8 @@ const summarizeText = async (text: string): Promise<string> => {
       const { data } = await axios.post<{ summary_text: string }[]>(HUGGING_FACE_API_URL, payload, {
         headers: {
           Authorization: `Bearer ${HUGGING_FACE_API_TOKEN}`,
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       });
       return Array.isArray(data) ? data[0].summary_text : text;
     } catch (err) {
@@ -75,7 +74,7 @@ const summarizeText = async (text: string): Promise<string> => {
         console.error(`Summarization failed:`, err);
         return text;
       }
-      await new Promise(res => setTimeout(res, i * 1000));
+      await new Promise((res) => setTimeout(res, i * 1000));
     }
   }
   return text;
@@ -89,10 +88,8 @@ export const summarizeLargeText = async (originalText: string): Promise<string> 
 
   while (estimateTokens(working) > MAX_TOKENS) {
     const chunks = getSmartChunks(working);
-    const partials = await Promise.all(
-      chunks.map(chunk => limit(() => summarizeText(chunk)))
-    );
-    working = partials.join(' ');
+    const partials = await Promise.all(chunks.map((chunk) => limit(() => summarizeText(chunk))));
+    working = partials.join(" ");
   }
 
   // 최종 한 번 더 요약

@@ -1,13 +1,12 @@
 export type StandardCategory =
   | "politics"
-  | "economy"
+  | "business"
   | "society"
   | "culture"
-  | "sports"
-  | "general"
-  | "health"
+  | "environment"
+  | "sport"
   | "science"
-  | "technology";
+  | "fashion";
 
 type NewsAPICategory =
   | "business"
@@ -28,15 +27,14 @@ type NYTAPICategory =
   | "world"
   | "us";
 type GuardianAPICategory =
-  | "news"
-  | "sport"
-  | "commentisfree"
-  | "culture"
   | "politics"
   | "business"
+  | "society"
+  | "culture"
   | "environment"
-  | "technology"
-  | "society";
+  | "sport"
+  | "science"
+  | "fashion";
 
 export const apiCategoryMapping: {
   [key in StandardCategory]?: {
@@ -50,7 +48,7 @@ export const apiCategoryMapping: {
     nytimes: "politics",
     guardian: "politics",
   },
-  economy: {
+  business: {
     newsapi: "business",
     nytimes: "business",
     guardian: "business",
@@ -65,9 +63,24 @@ export const apiCategoryMapping: {
     nytimes: "arts",
     guardian: "culture",
   },
-  sports: {
+  environment: {
+    newsapi: "sports",
+    nytimes: "sports",
+    guardian: "environment",
+  },
+  sport: {
     newsapi: "sports",
     nytimes: "sports",
     guardian: "sport",
+  },
+  science: {
+    newsapi: "sports",
+    nytimes: "sports",
+    guardian: "science",
+  },
+  fashion: {
+    newsapi: "sports",
+    nytimes: "sports",
+    guardian: "fashion",
   },
 };

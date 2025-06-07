@@ -1,5 +1,5 @@
 // src/pages/InterestNews.tsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
@@ -17,9 +17,13 @@ type Topic = {
 // 기본 관심 주제 목록 정의 (영문 값 추가)
 const defaultTopics: Topic[] = [
   { name: "정치", value: "politics", selected: true },
-  { name: "경제", value: "economy", selected: false },
+  { name: "경제", value: "business", selected: false },
   { name: "사회", value: "society", selected: false },
   { name: "문화", value: "culture", selected: true },
+  { name: "환경", value: "environment", selected: true },
+  { name: "스포츠", value: "sport", selected: true },
+  { name: "과학", value: "science", selected: true },
+  { name: "패션", value: "fashion", selected: true },
   // 필요한 다른 카테고리 추가 (value는 고유한 영문/식별자 사용)
 ];
 
